@@ -10,27 +10,18 @@ namespace mongodbfront.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LogsController
+    public class LogsBController : Controller
     {
-        public Services.ServiceClass service {get;}
-
-        public LogsController (ServiceClass svc) 
+        public Services.ServiceB service { get; }
+        public LogsBController(ServiceB svc)
         {
             this.service = svc;
         }
 
         [HttpGet]
-        public List<Exercise_log> Get()
+        public List<Food_log> Get()
         {
-            return service.exercises();
+            return service.f_Logs();
         }
-
-
-        //[HttpGet]
-        //public List<Food_log> GetE()
-        //{
-        //    return service.f_Logs();
-        //}
-
     }
 }

@@ -13,7 +13,7 @@ namespace mongodbfront.Models
         
     }
 
-    public class Exercis_log: ExerciseMethodShareDtNt.Exercise_Log
+    public class Exercise_log: ExerciseMethodShareDtNt.Exercise_Log
     {
 
     }

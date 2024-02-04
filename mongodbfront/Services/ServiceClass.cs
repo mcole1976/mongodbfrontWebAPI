@@ -10,38 +10,41 @@ namespace mongodbfront.Services
 {
     public class ServiceClass
     {
-        private List<Models.Food_log> logs_F;
-        private List<ExerciseMethodShareDtNt.Exercise_Log> _ex;
+        
+        private List<Models.Exercise_log> _ex;
+
         public ServiceClass( )
         {
-            logs_F = f_Logs();
             _ex = exercises();
         }
-        public List<Food_log> f_Logs()
-            {
-            List<Models.Food_log> list_F = new List<Food_log>();
-            List<ExerciseMethodShareDtNt.Food_Log> f = new List<ExerciseMethodShareDtNt.Food_Log>();
-            f = CreateExercises.ExerciseDataFeed.FoodLogs();
+        
 
-            foreach(Food_Log fd in f)
+        public List<Models.Exercise_log> exercises()
+        {
+            List<Models.Exercise_log> list_F = new List<Exercise_log>();
+            List<ExerciseMethodShareDtNt.Exercise_Log> f = new List<ExerciseMethodShareDtNt.Exercise_Log>();
+
+
+            f =  CreateExercises.ExerciseDataFeed.ExerciseLogs();
+
+            foreach (Exercise_Log fd in f)
             {
-                Models.Food_log res = new Food_log();
-                res.Meal = fd.Meal;
-                res.Meal_Description = fd.Meal_Description;
+                DateTime d = new DateTime();
+                Models.Exercise_log res = new Exercise_log();
+                res.Exercise_Name = fd.Exercise_Name;
+                res.Exercise_Time = fd.Exercise_Time;
                 res.Date = fd.Date;
                 res.Calorie_Count = fd.Calorie_Count;
-
-                list_F.Add(res);
+                DateTime nd = DateTime.UtcNow;
+                DateTime sd = nd.AddDays(-7);
+                if (res.Date > sd)
+                {
+                    list_F.Add(res);
+                }
 
             }
 
             return list_F;
-
-        }
-
-        public List<ExerciseMethodShareDtNt.Exercise_Log > exercises()
-        {
-            return CreateExercises.ExerciseDataFeed.ExerciseLogs();
         }
 
     }

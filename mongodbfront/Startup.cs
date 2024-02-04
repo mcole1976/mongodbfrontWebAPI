@@ -27,7 +27,8 @@ namespace mongodbfront
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ServiceClass>();
+            services.AddTransient<ServiceClass>();
+            services.AddSingleton<ServiceB>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
