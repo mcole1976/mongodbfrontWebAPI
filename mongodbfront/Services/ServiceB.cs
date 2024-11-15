@@ -42,5 +42,21 @@ namespace mongodbfront.Services
             return list_F;
 
         }
+
+        internal bool AddEx(Exercise_log a)
+        {
+            ExerciseMethodShareDtNt.Exercise_Log f = (Exercise_log)a;
+
+            try
+            {
+                CreateExercises.ExerciseDataFeed.Make_Exercise_Regiment(4, f.Exercise_Name, f.Exercise_Time);
+                CreateExercises.ExerciseDataFeed.Make_Log_Entry_Names(f.Calorie_Count, f.Exercise_Name, f.Exercise_Time);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

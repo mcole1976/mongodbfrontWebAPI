@@ -1,13 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    <Compile Remove="Resoursces\**" />
+    <Content Remove="Resoursces\**" />
+    <EmbeddedResource Remove="Resoursces\**" />
+    <None Remove="Resoursces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +25,15 @@
     </Reference>
     <Reference Include="ExerciseMethodShareDtNt">
       <HintPath>..\..\ExerciseMethodShareDtNt\ExerciseMethodShareDtNt\bin\Release\netstandard2.0\ExerciseMethodShareDtNt.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\..\..\.nuget\packages\mongodb.bson\2.23.1\lib\netstandard2.1\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="TaskandGoalDataFeed">
+      <HintPath>..\..\TashandGoalDataFeed\TashandGoalDataFeed\bin\Release\net8.0\TaskandGoalDataFeed.dll</HintPath>
+    </Reference>
+    <Reference Include="Task_List">
+      <HintPath>..\..\Task_List\Task_List\bin\Release\net8.0\Task_List.dll</HintPath>
     </Reference>
   </ItemGroup>
 

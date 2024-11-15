@@ -31,7 +31,7 @@ namespace mongodbfront.Services
             {
                 DateTime d = new DateTime();
                 Models.Exercise_log res = new Exercise_log();
-                res.Exercise_Name = fd.Exercise_Name;
+                res.Exercise_Name = CreateExercises.ExerciseDataFeed.ExerciseName(fd.Exercise_ID);
                 res.Exercise_Time = fd.Exercise_Time;
                 res.Date = fd.Date;
                 res.Calorie_Count = fd.Calorie_Count;
@@ -47,5 +47,20 @@ namespace mongodbfront.Services
             return list_F;
         }
 
+        internal bool AddFood(Food_log a)
+        {
+            ExerciseMethodShareDtNt.Food_Log f = (Food_Log)a;
+
+            try
+            {
+                CreateExercises.ExerciseDataFeed.Make_Food_Entry(f);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+
+        }
     }
 }

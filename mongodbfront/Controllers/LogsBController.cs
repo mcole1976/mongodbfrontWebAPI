@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using mongodbfront.Models;
 using mongodbfront.Services;
 
@@ -23,5 +24,9 @@ namespace mongodbfront.Controllers
         {
             return service.f_Logs();
         }
+
+        [HttpPost]
+        public bool Post(Models.Exercise_log A) => service.AddEx(A);
+        
     }
 }

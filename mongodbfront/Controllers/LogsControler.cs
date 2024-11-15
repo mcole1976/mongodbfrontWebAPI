@@ -31,6 +31,8 @@ namespace mongodbfront.Controllers
         //{
         //    return service.f_Logs();
         //}
+        [HttpPost]
+        public bool Post(Models.Food_log A) => service.AddFood(A);
 
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,23 @@ namespace mongodbfront
         {
             services.AddTransient<ServiceClass>();
             services.AddSingleton<ServiceB>();
+            services.AddTransient<ServiceD>();
+            services.AddSingleton<ServiceC>();
+            services.AddCors(options => 
+            { options.AddPolicy("AllowSpecificOrigins", 
+                builder => { builder.WithOrigins("http://localhost:3000") // Add your client's origin here
+              .AllowAnyHeader() 
+              .AllowAnyMethod(); }); 
+            });
+
+
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect; options.HttpsPort = 443;
+                // The port for HTTPS, usually 443
+            });
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -47,6 +65,8 @@ namespace mongodbfront
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowSpecificOrigins");
 
             app.UseRouting();
 

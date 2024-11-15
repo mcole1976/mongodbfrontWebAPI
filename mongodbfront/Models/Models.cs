@@ -17,4 +17,17 @@ namespace mongodbfront.Models
     {
 
     }
+
+    public class Goal : ExerciseMethodShareDtNt.Goal { }
+
+    public class Task : ExerciseMethodShareDtNt.Task { }
+
+    public class Task_Done  
+    {
+        public Task_Done() 
+        { 
+        
+        }
+
+    }
 }
