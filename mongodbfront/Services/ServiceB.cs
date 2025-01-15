@@ -58,5 +58,33 @@ namespace mongodbfront.Services
                 return false;
             }
         }
+
+        internal List<Food_log> f_Logs1()
+        {
+            List<Models.Food_log> list_F = new List<Food_log>();
+            List<ExerciseMethodShareDtNt.Food_Log> f = new List<ExerciseMethodShareDtNt.Food_Log>();
+            f = CreateExercises.ExerciseDataFeed.FoodLogs();
+
+
+            foreach (Food_Log fd in f)
+            {
+
+                DateTime d = new DateTime();
+                Models.Food_log res = new Food_log();
+                res.Meal = fd.Meal;
+                res.Meal_Description = fd.Meal_Description;
+                res.Date = fd.Date;
+                res.Calorie_Count = fd.Calorie_Count;
+                DateTime nd = DateTime.UtcNow;
+                
+                if (res.Date.Date == DateTime.Today)
+                {
+                    list_F.Add(res);
+                }
+
+            }
+
+            return list_F;
+        }
     }
 }
