@@ -25,9 +25,9 @@ namespace mongodbfront.Controllers
                 var food = new Models.Food_ALL();
                 food.Id = foodLog.Id;
                 food.Meal = foodLog.Meal;
-                food.Meal_Description = foodLog.Meal_Description;
-                food.Date = foodLog.Date;
-                food.Calorie_Count = foodLog.Calorie_Count;
+                food.Meal_Description = foodLog.MealDescription;
+                food.Date = foodLog.ConsumptionDate;
+                food.Calorie_Count = foodLog.CalorieCount;
                 foodList.Add(food);
             }
             return foodList;
