@@ -32,11 +32,18 @@ namespace mongodbfront
             services.AddSingleton<ServiceB>();
             services.AddTransient<ServiceD>();
             services.AddSingleton<ServiceC>();
-            services.AddCors(options => 
-            { options.AddPolicy("AllowSpecificOrigins", 
-                builder => { builder.WithOrigins("http://localhost:3000") // Add your client's origin here
-              .AllowAnyHeader() 
-              .AllowAnyMethod(); }); 
+            services.AddSingleton<Exercise_Service>();
+            services.AddSingleton<Food_Service>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigins",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000") // Add your client's origin here
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+                });
             });
 
 

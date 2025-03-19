@@ -17,6 +17,12 @@ namespace mongodbfront.Models
     {
 
     }
+    public class Exercise_All : ExerciseMethodShareDtNt.ExerciseAll
+    {
+    }
+
+    public class Food_ALL : ExerciseMethodShareDtNt.FoodAll 
+    { }
 
     public class Goal : ExerciseMethodShareDtNt.Goal { }
 
