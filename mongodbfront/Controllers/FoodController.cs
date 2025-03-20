@@ -34,9 +34,20 @@ namespace mongodbfront.Controllers
 
         }
         [HttpPost("Update")]
-        public async System.Threading.Tasks.Task Update(Models.Food_ALL food)
+        public async System.Threading.Tasks.Task<IActionResult> Update(Models.Food_ALL food)
         {
-            await Food_Service.FoodUpdateBsonAsync(food);
+            try
+            {
+                await Food_Service.FoodUpdateBsonAsync(food);
+                return new OkObjectResult(new { message = "Food updated successfully." });
+            }
+            catch (System.Exception ex)
+            {
+                return new ObjectResult(new { message = "An error occurred while updating the food." })
+                {
+                    StatusCode = 500 // Internal Server Error
+                };
+            }
         }
     }
 }

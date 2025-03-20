@@ -32,9 +32,21 @@ namespace mongodbfront.Controllers
             return ExList;
         }
         [HttpPost("Update")]
-        public async System.Threading.Tasks.Task Update(Models.Exercise_All Ex)
+        public async System.Threading.Tasks.Task<IActionResult> Update(Models.Exercise_All Ex)
         {
-            await Exercise_Service.ExerciseUpdateBsonSych(Ex);
+            try
+            {
+                await Exercise_Service.ExerciseUpdateBsonSych(Ex);
+                return new OkObjectResult(new { message = "Food updated successfully." });
+
+            }
+            catch (System.Exception ex)
+            {
+                return new ObjectResult(new { message = "An error occurred while updating the food." })
+                {
+                    StatusCode = 500 // Internal Server Error
+                };
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CreateExercises;
 using ExerciseMethodShareDtNt;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace mongodbfront.Services
@@ -14,9 +15,21 @@ namespace mongodbfront.Services
             return list_F;
         }
 
-        public static async System.Threading.Tasks.Task FoodUpdateBsonAsync(FoodAll food)
+        public static async System.Threading.Tasks.Task<IActionResult> FoodUpdateBsonAsync(FoodAll food)
         {
-            await System.Threading.Tasks.Task.Run(() => ExerciseDataFeed.updateFood(food));
+            try
+            {
+                await System.Threading.Tasks.Task.Run(() => ExerciseDataFeed.updateFood(food));
+                return new OkObjectResult(new { message = "Food updated successfully." });
+            }
+            catch(System.Exception ex)
+            {
+                return new ObjectResult(new { message = "An error occurred while updating the food." })
+                {
+                    StatusCode = 500 // Internal Server Error
+                };
+            }
+            
         }
     }
 }
