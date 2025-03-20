@@ -33,5 +33,10 @@ namespace mongodbfront.Controllers
             return foodList;
 
         }
+        [HttpPost("Update")]
+        public async System.Threading.Tasks.Task Update(Models.Food_ALL food)
+        {
+            await Food_Service.FoodUpdateBsonAsync(food);
+        }
     }
 }

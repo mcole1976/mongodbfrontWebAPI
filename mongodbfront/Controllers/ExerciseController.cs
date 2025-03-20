@@ -31,5 +31,10 @@ namespace mongodbfront.Controllers
             }
             return ExList;
         }
+        [HttpPost("Update")]
+        public async System.Threading.Tasks.Task Update(Models.Exercise_All Ex)
+        {
+            await Exercise_Service.ExerciseUpdateBsonSych(Ex);
+        }
     }
 }

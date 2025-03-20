@@ -17,5 +17,11 @@ namespace mongodbfront.Services
             return list_F;
         }
 
+        public static async System.Threading.Tasks.Task ExerciseUpdateBsonSych(ExerciseAll Ex)
+        {
+            
+             await System.Threading.Tasks.Task.Run(() => ExerciseDataFeed.updateExercise(Ex));
+            
+        }
     }
 }

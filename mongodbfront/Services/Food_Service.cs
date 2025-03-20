@@ -13,5 +13,10 @@ namespace mongodbfront.Services
             list_F = await System.Threading.Tasks.Task.Run(() => ExerciseDataFeed.FoodLogsBson(tFrame));
             return list_F;
         }
+
+        public static async System.Threading.Tasks.Task FoodUpdateBsonAsync(FoodAll food)
+        {
+            await System.Threading.Tasks.Task.Run(() => ExerciseDataFeed.updateFood(food));
+        }
     }
 }
