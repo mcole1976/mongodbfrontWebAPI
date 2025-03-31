@@ -30,8 +30,8 @@ namespace mongodbfront
         {
             services.AddTransient<ServiceClass>();
             services.AddSingleton<ServiceB>();
-            services.AddTransient<ServiceD>();
-            services.AddSingleton<ServiceC>();
+           // services.AddTransient<ServiceD>();
+            //services.AddSingleton<ServiceC>();
             services.AddSingleton<Exercise_Service>();
             services.AddSingleton<Food_Service>();
 

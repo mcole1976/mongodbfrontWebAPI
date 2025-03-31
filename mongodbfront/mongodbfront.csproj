@@ -30,12 +30,6 @@
     <Reference Include="MongoDB.Bson">
       <HintPath>..\..\..\..\.nuget\packages\mongodb.bson\2.23.1\lib\netstandard2.1\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="TaskandGoalDataFeed">
-      <HintPath>..\..\TashandGoalDataFeed\TashandGoalDataFeed\bin\Release\net8.0\TaskandGoalDataFeed.dll</HintPath>
-    </Reference>
-    <Reference Include="Task_List">
-      <HintPath>..\..\Task_List\Task_List\bin\Release\net8.0\Task_List.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
