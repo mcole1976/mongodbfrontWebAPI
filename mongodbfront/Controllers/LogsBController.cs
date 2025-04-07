@@ -27,6 +27,8 @@ namespace mongodbfront.Controllers
 
         [HttpPost]
         public bool Post(Models.Exercise_log A) => service.AddEx(A);
+
+
         
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,12 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using mongodbfront.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace mongodbfront
 {
@@ -28,10 +32,28 @@ namespace mongodbfront
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = "dotnet - user - jwts", // Use 'Configuration' (not 'builder')
+               // ValidateAudience = true,
+                ValidAudience = "https://localhost:44377/api/Exercise",
+                IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkV4ZXJjaXNlVXNlciIsInN1YiI6IkV4ZXJjaXNlVXNlciIsImp0aSI6ImY2NDNjZTVmIiwic2NvcGUiOiJleGVyY2lzZTpyZWFkLGV4ZXJjaXNlOndyaXRlIiwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTE3NTMiLCJodHRwczovL2xvY2FsaG9zdDo0NDM3NyIsImh0dHBzOi8vbG9jYWxob3N0OjUwMDEiLCJodHRwOi8vbG9jYWxob3N0OjUwMDAiXSwibmJmIjoxNzQzODI3MDc3LCJleHAiOjE3NTE2ODk0NzcsImlhdCI6MTc0MzgyNzA4MiwiaXNzIjoiZG90bmV0LXVzZXItand0cyJ9.uy5ecTaygIKFE-ITu6HNJghwuEyHLHtB1k2HpWFQZUI")) // Replace with your key
+            };
+
+    });
             services.AddTransient<ServiceClass>();
             services.AddSingleton<ServiceB>();
-           // services.AddTransient<ServiceD>();
-            //services.AddSingleton<ServiceC>();
+          services.AddTransient<JWTService>();
             services.AddSingleton<Exercise_Service>();
             services.AddSingleton<Food_Service>();
 

@@ -9,7 +9,12 @@ namespace mongodbfront.Services
     {
         private List<Models.Food_log> logs_F;
 
+        private JWTService _j;
 
+        public ServiceB(JWTService jwtService)
+        {
+            _j = jwtService;
+        }
         public ServiceB()
         {
             logs_F = f_Logs();
@@ -86,5 +91,17 @@ namespace mongodbfront.Services
 
             return list_F;
         }
+
+        public string GetAccessToken()
+        {
+            return _j.GenerateToken();
+        }
+
+        public bool ValidateAccessToken(string token)
+        {
+            return _j.ValidateToken(token);
+        }
+
+
     }
 }
