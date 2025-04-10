@@ -22,15 +22,17 @@ namespace mongodbfront.Controllers
         
 
         private readonly string _authToken;
-        public GenDataController(ServiceB svc)
+        public GenDataController(ServiceB svc, IConfiguration configuration)
         {
             this.service = svc;
-        }
-        public GenDataController(IConfiguration configuration)
-        {
-            // Retrieve the Token from AuthSettings in appsettings.json or other configuration sources
             _authToken = configuration["AuthSettings:Token"];
+
         }
+        //public GenDataController(IConfiguration configuration)
+        //{
+        //    // Retrieve the Token from AuthSettings in appsettings.json or other configuration sources
+        //    _authToken = configuration["AuthSettings:Token"];
+        //}
 
         [HttpGet]
         public  async Task< List<Food_log>> Get()

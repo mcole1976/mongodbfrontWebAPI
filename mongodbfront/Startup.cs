@@ -69,11 +69,11 @@ namespace mongodbfront
             });
 
 
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect; options.HttpsPort = 443;
-                // The port for HTTPS, usually 443
-            });
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect; options.HttpsPort = 443;
+            //    // The port for HTTPS, usually 443
+            //});
 
 
             services.AddControllers();
@@ -93,7 +93,7 @@ namespace mongodbfront
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "mongodbfront v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseCors("AllowSpecificOrigins");
 
