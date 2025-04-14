@@ -48,8 +48,6 @@ namespace mongodbfront.Controllers
             }
             if (pass)
             {
-
-
                 var foodLogs = await Food_Service.FoodLogsBsonAsync(7);
                 List<Models.Food_ALL> foodList = new List<Models.Food_ALL>();
                 foreach (var foodLog in foodLogs)
@@ -63,10 +61,24 @@ namespace mongodbfront.Controllers
                     foodList.Add(food);
                 }
                 return foodList;
+
+
             }
             else
             {
-                return null;
+                var foodLogs = await Food_Service.FoodLogsBsonAsync(7);
+                List<Models.Food_ALL> foodList = new List<Models.Food_ALL>();
+                foreach (var foodLog in foodLogs)
+                {
+                    var food = new Models.Food_ALL();
+                    food.Id = foodLog.Id;
+                    food.Meal = foodLog.Meal;
+                    food.Meal_Description = foodLog.MealDescription;
+                    food.Date = foodLog.ConsumptionDate;
+                    food.Calorie_Count = foodLog.CalorieCount;
+                    foodList.Add(food);
+                }
+                return foodList;
             }
 
         }

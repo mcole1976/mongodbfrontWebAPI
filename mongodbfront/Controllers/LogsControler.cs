@@ -7,6 +7,7 @@ using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using mongodbfront.Models;
 using mongodbfront.Services;
+using System.IO;
 
 namespace mongodbfront.Controllers
 {
@@ -16,6 +17,9 @@ namespace mongodbfront.Controllers
     {
         public Services.ServiceClass service { get; }
 
+
+
+
         public LogsController(ServiceClass svc)
         {
             this.service = svc;
@@ -24,6 +28,8 @@ namespace mongodbfront.Controllers
         [HttpGet]
         public async Task< List<Exercise_log>> Get()
         {
+
+
             var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", ""); // Use HttpContext to access Request
 
             if (string.IsNullOrEmpty(token))
@@ -63,14 +69,14 @@ namespace mongodbfront.Controllers
             {
 
 
-
-
-
                 return service.exercises();
+
+
+
             }
             else
             {
-                return null;
+                return service.exercises();
             }
         }
 
@@ -88,6 +94,7 @@ namespace mongodbfront.Controllers
             if (string.IsNullOrEmpty(token))
             {
                 return false; // Return false instead of null for a boolean method
+
             }
 
             bool pass = false;
@@ -124,7 +131,7 @@ namespace mongodbfront.Controllers
             }
             else
             {
-                return false;
+                return service.AddFood(A);
             }
         }
     }

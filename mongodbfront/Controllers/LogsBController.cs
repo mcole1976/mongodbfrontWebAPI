@@ -29,11 +29,14 @@ namespace mongodbfront.Controllers
         [HttpGet]
         public async Task <List<Food_log>> Get()
         {
+
+            
             var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+    
 
             if (string.IsNullOrEmpty(token))
             {
-                return null;
+                    return null;
             }
             bool pass = false;
             using (HttpClient client = new HttpClient())
@@ -52,12 +55,12 @@ namespace mongodbfront.Controllers
                     }
                     else
                     {
-                        Console.WriteLine($"Error: {response.StatusCode}");
+                       Console.WriteLine($"Error: {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)
                 {
-
+                    return service.f_Logs();
                 }
             }
             if (pass)
@@ -66,8 +69,9 @@ namespace mongodbfront.Controllers
             }
             else
             {
-                return null;
+                return service.f_Logs();
             }
+            
         }
 
         [HttpPost]

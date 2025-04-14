@@ -47,7 +47,7 @@ namespace mongodbfront.Controllers
             bool pass = false;
             using (HttpClient client = new HttpClient())
             {
-                string apiurl = "https://localhost:44377/api/access?token=" + token;
+                string apiurl = "https://192.168.0.166:44305/api/access?token=" + token;
                 try
                 {
                     HttpResponseMessage response = await client.GetAsync(apiurl);
@@ -75,7 +75,7 @@ namespace mongodbfront.Controllers
             }
             else
             {
-                return null;
+                return service.f_Logs1();
             }
         }
     }
