@@ -22,9 +22,56 @@ namespace mongodbfront.Controllers
         }
 
         [HttpGet]
-        public List<Exercise_log> Get()
+        public async Task< List<Exercise_log>> Get()
         {
-            return service.exercises();
+            var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", ""); // Use HttpContext to access Request
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return null; // Return false instead of null for a boolean method
+            }
+
+            bool pass = false;
+
+            using (HttpClient client = new HttpClient())
+            {
+                string apiurl = "https://localhost:44377/api/access?token=" + token;
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiurl); // Await the async call
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseContent = await response.Content.ReadAsStringAsync(); // Await the async call
+                        Console.WriteLine("Response Content:");
+                        Console.WriteLine(responseContent);
+                        pass = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex.Message}");
+                }
+
+                // Ensure a boolean value is returned in all code paths
+            }
+            if (pass)
+            {
+
+
+
+
+
+                return service.exercises();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         //[HttpGet]

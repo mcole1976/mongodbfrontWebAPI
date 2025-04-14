@@ -22,6 +22,8 @@ namespace mongodbfront.Services
 
         public List<Food_log> f_Logs()
         {
+
+
             List<Models.Food_log> list_F = new List<Food_log>();
             List<ExerciseMethodShareDtNt.Food_Log> f = new List<ExerciseMethodShareDtNt.Food_Log>();
             f = CreateExercises.ExerciseDataFeed.FoodLogs();

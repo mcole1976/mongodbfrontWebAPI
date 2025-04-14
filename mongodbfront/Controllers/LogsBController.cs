@@ -71,7 +71,48 @@ namespace mongodbfront.Controllers
         }
 
         [HttpPost]
-        public bool Post(Models.Exercise_log A) => service.AddEx(A);
+        public async Task< bool> Post(Models.Exercise_log A)
+
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return false;
+            }
+            bool pass = false;
+            string apiurl = "https://localhost:44377/api/access?token=" + token;
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiurl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Response Content:");
+                    Console.WriteLine(responseContent);
+                    pass = true;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode}");
+                }
+
+
+
+
+            }
+            if (pass)
+            {
+                service.AddEx(A);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+  
 
 
         
