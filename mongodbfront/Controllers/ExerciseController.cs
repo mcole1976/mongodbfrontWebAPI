@@ -36,40 +36,40 @@ namespace mongodbfront.Controllers
         public async Task<List<Models.Exercise_All>> Get()
         {
 
-            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
-            if (string.IsNullOrEmpty(token) )
-            {
-                return null;
-            }
+            //if (string.IsNullOrEmpty(token) )
+            //{
+            //    return null;
+            //}
 
-            bool pass= false;
+            //bool pass= false;
 
-            using (HttpClient client = new HttpClient())
-            {
-                string apiurl = "https://192.168.0.166:44305/api/access?token=" + token;
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiurl);
+            //using (HttpClient client = new HttpClient())
+            //{
+            //    string apiurl = "https://192.168.0.166:44305/api/access?token=" + token;
+            //    try
+            //    {
+            //        HttpResponseMessage response = await client.GetAsync(apiurl);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseContent = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine("Response Content:");
-                        Console.WriteLine(responseContent);
-                        pass = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error: {response.StatusCode}");
-                    }
-                }
-                catch (Exception ex)
-                {
+            //        if (response.IsSuccessStatusCode)
+            //        {
+            //            string responseContent = await response.Content.ReadAsStringAsync();
+            //            Console.WriteLine("Response Content:");
+            //            Console.WriteLine(responseContent);
+            //            pass = true;
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine($"Error: {response.StatusCode}");
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
 
-                }
-            }
-            if (pass) {
+            //    }
+            //}
+            //if (pass) {
 
                 var ExLogs = await Exercise_Service.ExerciseBsonSych(15);
                 List<Models.Exercise_All> ExList = new List<Models.Exercise_All>();
@@ -84,10 +84,7 @@ namespace mongodbfront.Controllers
                     ExList.Add(Ex);
                 }
                 return ExList;
-            }
-            else {
-                return null;
-            }
+            
         }
         [HttpPost("Update")]
         public async System.Threading.Tasks.Task<IActionResult> Update(Models.Exercise_All Ex)

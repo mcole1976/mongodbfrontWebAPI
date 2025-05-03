@@ -31,46 +31,9 @@ namespace mongodbfront.Controllers
         {
 
             
-            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-    
-
-            if (string.IsNullOrEmpty(token))
-            {
-                    return null;
-            }
-            bool pass = false;
-            using (HttpClient client = new HttpClient())
-            {
-                string apiurl = "https://192.168.0.166:44305/api/access?token=" + token;
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiurl);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseContent = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine("Response Content:");
-                        Console.WriteLine(responseContent);
-                        pass = true;
-                    }
-                    else
-                    {
-                       Console.WriteLine($"Error: {response.StatusCode}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return service.f_Logs();
-                }
-            }
-            if (pass)
-            {
+            
                 return service.f_Logs();
-            }
-            else
-            {
-                return service.f_Logs();
-            }
+            
             
         }
 
@@ -78,43 +41,10 @@ namespace mongodbfront.Controllers
         public async Task< bool> Post(Models.Exercise_log A)
 
         {
-            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-
-            if (string.IsNullOrEmpty(token))
-            {
-                return false;
-            }
-            bool pass = false;
-            string apiurl = "https://192.168.0.166:44305/api/access?token=" + token;
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage response = await client.GetAsync(apiurl);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Response Content:");
-                    Console.WriteLine(responseContent);
-                    pass = true;
-                }
-                else
-                {
-                    Console.WriteLine($"Error: {response.StatusCode}");
-                }
-
-
-
-
-            }
-            if (pass)
-            {
+            
                 service.AddEx(A);
                 return true;
-            }
-            else
-            {
-                return false;
-            }
+            
         }
   
 
