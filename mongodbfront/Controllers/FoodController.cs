@@ -6,6 +6,7 @@ using mongodbfront.Services;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System;
+using MongoDB.Bson.Serialization;
 
 
 namespace mongodbfront.Controllers
@@ -48,22 +49,22 @@ namespace mongodbfront.Controllers
             //}
             //if (pass)
             //{
-                var foodLogs = await Food_Service.FoodLogsBsonAsync(7);
-                List<Models.Food_ALL> foodList = new List<Models.Food_ALL>();
-                foreach (var foodLog in foodLogs)
-                {
-                    var food = new Models.Food_ALL();
-                    food.Id = foodLog.Id;
-                    food.Meal = foodLog.Meal;
-                    food.Meal_Description = foodLog.MealDescription;
-                    food.Date = foodLog.ConsumptionDate;
-                    food.Calorie_Count = foodLog.CalorieCount;
-                    foodList.Add(food);
-                }
-                return foodList;
+            var foodLogs = await Food_Service.FoodLogsBsonAsync(7);
+            List<Models.Food_ALL> foodList = new List<Models.Food_ALL>();
+            foreach (var foodLog in foodLogs)
+            {
+                var food = new Models.Food_ALL();
+                food.Id = foodLog.Id;
+                food.Meal = foodLog.Meal;
+                food.Meal_Description = foodLog.MealDescription;
+                food.Date = foodLog.ConsumptionDate;
+                food.Calorie_Count = foodLog.CalorieCount;
+                foodList.Add(food);
+            }
+            return foodList;
 
 
-            
+
 
         }
         [HttpPost("Update")]
@@ -82,5 +83,24 @@ namespace mongodbfront.Controllers
                 };
             }
         }
+
+
+        [HttpGet("Get")]
+        public async Task<List<String>> GetDDL()
+        {
+            List<string> mealtypes = new List<string>();
+            try
+            {
+                mealtypes = await Food_Service.GetMealDes();
+                
+            }
+            catch (System.Exception ex)
+            {
+                return new List<String>(); // Return an empty list in case of an error
+            }
+            return mealtypes;
+        }
+        
+        
     }
 }

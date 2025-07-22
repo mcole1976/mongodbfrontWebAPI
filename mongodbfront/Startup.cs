@@ -56,7 +56,8 @@ namespace mongodbfront
           services.AddTransient<JWTService>();
             services.AddSingleton<Exercise_Service>();
             services.AddSingleton<Food_Service>();
-
+            services.AddSingleton<RoutineData>();
+            services.AddSingleton<WorkOutDataService>();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigins",

@@ -1,7 +1,9 @@
 ﻿using CreateExercises;
 using ExerciseMethodShareDtNt;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace mongodbfront.Services
 {
@@ -30,6 +32,13 @@ namespace mongodbfront.Services
                 };
             }
             
+        }
+
+        internal static async Task<List<string>> GetMealDes()
+        {
+            List<string> mealTypes = new List<string>();
+            mealTypes =  await System.Threading.Tasks.Task.Run(() => ExerciseDataFeed.MealTypeList());
+            return mealTypes;
         }
     }
 }

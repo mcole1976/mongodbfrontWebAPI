@@ -28,6 +28,9 @@ namespace mongodbfront.Models
 
     public class Task : ExerciseMethodShareDtNt.Task { }
 
+    public class Routine : ExerciseMethodShareDtNt.WorkOut { }
+    
+
     public class Task_Done  
     {
         public Task_Done() 
