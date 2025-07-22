@@ -85,6 +85,24 @@ namespace mongodbfront.Controllers
         }
 
 
+        [HttpPost("Delete")]
+        public async System.Threading.Tasks.Task<IActionResult> Delete(Models.Food_ALL food)
+        {
+            try
+            {
+                await Food_Service.FoodDeleteAsync(food);
+                return new OkObjectResult(new { message = "Food updated successfully." });
+            }
+            catch (System.Exception ex)
+            {
+                return new ObjectResult(new { message = "An error occurred while updating the food." })
+                {
+                    StatusCode = 500 // Internal Server Error
+                };
+            }
+        }
+
+
         [HttpGet("Get")]
         public async Task<List<String>> GetDDL()
         {
