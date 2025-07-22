@@ -73,7 +73,9 @@ namespace mongodbfront.Controllers
             try
             {
                 await Food_Service.FoodUpdateBsonAsync(food);
-                return new OkObjectResult(new { message = "Food updated successfully." });
+                return new OkObjectResult(new {
+                    success = true,
+                    message = "Food updated successfully." });
             }
             catch (System.Exception ex)
             {
@@ -91,7 +93,9 @@ namespace mongodbfront.Controllers
             try
             {
                 await Food_Service.FoodDeleteAsync(food);
-                return new OkObjectResult(new { message = "Food updated successfully." });
+                return new OkObjectResult(new {
+                    success = true,
+                    message = "Food deleted successfully." });
             }
             catch (System.Exception ex)
             {

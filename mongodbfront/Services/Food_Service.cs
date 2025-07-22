@@ -36,7 +36,7 @@ namespace mongodbfront.Services
 
         }
 
-        internal static async Task<ObjectResult> FoodDeleteAsync(Food_ALL food)
+        internal static async Task<IActionResult> FoodDeleteAsync(Food_ALL food)
         {
             try
             {
